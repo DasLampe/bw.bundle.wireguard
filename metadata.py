@@ -8,7 +8,7 @@ def add_iptables(metadata):
     iptables_rules = {}
     for name,conf in metadata.get('wireguard').items():
         iptables_rules += repo.libs.iptables.accept(). \
-            input('main_interface'). \
+            input(conf.get('interface', 'main_interface')). \
             udp(). \
             dest_port(metadata.get('wireguard').get(name).get('port')). \
             comment(f'wireguard {name}')
