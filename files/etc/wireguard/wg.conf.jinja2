@@ -8,7 +8,7 @@ PostUp = wg set %i private-key <(cat /etc/wireguard/{{ name }}_privatekey)
 {{ key }} = {{ value }}
 {%  endfor %}
 
-{% for peer_name, peer in cfg.get('peers', []).items() %}
+{% for peer_name, peer in cfg.get('peers', {}).items() %}
 # {{ peer_name }}
 [Peer]
 PublicKey = {{ peer.get('public_key') }}
