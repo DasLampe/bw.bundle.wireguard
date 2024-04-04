@@ -7,11 +7,12 @@ def add_iptables(metadata):
 
     iptables_rules = {}
     for name,conf in metadata.get('wireguard').items():
-        iptables_rules += repo.libs.iptables.accept(). \
-            input(conf.get('interface', 'main_interface')). \
-            udp(). \
-            dest_port(metadata.get('wireguard').get(name).get('port')). \
-            comment(f'wireguard {name}')
+        if metadata.get('wireguard').get(name).get('port', False):
+            iptables_rules += repo.libs.iptables.accept(). \
+                input(conf.get('interface', 'main_interface')). \
+                udp(). \
+                dest_port(metadata.get('wireguard').get(name).get('port')). \
+                comment(f'wireguard {name}')
 
         # Ignore forward rules
         iptables_rules += repo.libs.iptables.jump('ACCEPT').chain('FORWARD').output(name).ignore()
