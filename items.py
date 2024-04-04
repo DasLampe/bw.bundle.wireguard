@@ -47,7 +47,7 @@ for name, config in node.metadata.get('wireguard').items():
         }
     else:
         actions[f"generate_wireguard_{name}_privatekey"] = {
-            'command': f"wg privkey > /etc/wireguard/{name}_privatekey && chown {owner}:{group} /etc/wireguard/{name}_privatekey",
+            'command': f"wg genkey > /etc/wireguard/{name}_privatekey && chown {owner}:{group} /etc/wireguard/{name}_privatekey",
             'needs': [
                 'pkg_apt:wireguard',
                 'directory:/etc/wireguard',
