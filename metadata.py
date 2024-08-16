@@ -14,8 +14,4 @@ def add_iptables(metadata):
                 dest_port(metadata.get('wireguard').get(name).get('port')). \
                 comment(f'wireguard {name}')
 
-        # Ignore forward rules
-        iptables_rules += repo.libs.iptables.jump('ACCEPT').chain('FORWARD').output(name).ignore()
-        iptables_rules += repo.libs.iptables.jump('ACCEPT').chain('FORWARD').input(name).ignore()
-
     return iptables_rules

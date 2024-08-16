@@ -23,7 +23,7 @@ directories = {
 svc_systemd = {
 }
 
-for name, config in node.metadata.get('wireguard').items():
+for name, config in node.metadata.get('wireguard', {}).items():
     svc_systemd[f'wg-quick@{name}.service'] = {
         'enabled': config.get('start_at_boot', False),
         'running': None,
