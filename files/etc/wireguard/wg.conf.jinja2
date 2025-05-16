@@ -1,5 +1,5 @@
 [Interface]
-Address = {{ cfg.get('address') }}
+Address = {{ ', '.join(cfg.get('addresses')) }}
 {% if cfg.get('port') -%}
 ListenPort = {{ cfg.get('port') }}
 {% endif %}

@@ -19,3 +19,17 @@ def add_iptables(metadata):
         iptables_rules += repo.libs.iptables.accept().chain('OUTPUT').output(conf.get('interface', name))
 
     return iptables_rules
+
+@metadata_reactor
+def backward_compatibility(metadata):
+    result = {
+        'wireguard': {},
+    }
+
+    for interface,interface_config in metadata.get('wireguard').items():
+        if metadata.get('wireguard').get(interface).get('address', False):
+            result['wireguard'][interface] = {
+                'addresses': [metadata.get('wireguard').get(interface).get('address')],
+            }
+
+    return result

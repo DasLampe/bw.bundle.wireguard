@@ -9,7 +9,7 @@ If you specify a `port` and use the [iptables-Bundle](https://github.com/shorst/
     'wireguard': {
         'wg0': {
             'start_at_boot': False, # disable start at boot time
-            'address': '10.10.10.1/24',
+            'addresses': ['10.10.10.1/24', 'fd00:1337:acab::f00/48'],
             'interface': 'main_interface',
             'port': '1337',
             'private_key': vault.decrypt('[yourEncryptedKey]').value,
@@ -26,7 +26,7 @@ If you specify a `port` and use the [iptables-Bundle](https://github.com/shorst/
                 },
                 'laptop': {
                     'public_key': 'eu2FEMZc0PH00IX42LiWTjV4tCuBWp9L8OJs2WSYuCg=',
-                    'allowed_ips': ['10.10.10.10/32'],
+                    'allowed_ips': ['10.10.10.10/32', 'fd00:1337:acab::ba12/128'],
                 },
             },
         },
